@@ -1,0 +1,18 @@
+numRolls = 10000; %Number of dice rolls
+
+% Simulate rolling two dice and calculate the sum
+diceSum = randi([1, 6], numRolls, 2); 
+%returns a [10000 * 2] matrix containing random integer values from [1 to 6] 
+sumValues = sum(diceSum, 2);
+% returns the sum of two dice in each roll, it is matrix of [10000 *1]
+
+% Calculate the probability distribution
+numOutcomes = 2*6; % Possible outcomes for "sum" of two dice
+probDistribution = histcounts(sumValues, 2:numOutcomes+1) / numRolls;
+
+% Plotting
+bar(2:numOutcomes, probDistribution);
+title('Central Limit Theorem: N=2 Dice');
+xlabel('Possibel Outcomes');
+ylabel('Probability');
+
