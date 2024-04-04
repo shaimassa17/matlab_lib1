@@ -1,0 +1,73 @@
+s_l=1000; %number of samples
+
+signal_1=randn(1,s_l); 
+
+%randn = any random numbers
+%rand = random numbers between 0 to 1
+
+signal_2=randn(1,s_l);
+
+autocorr_result1=xcorr(signal_1,signal_1);
+
+autocorr_result2=xcorr(signal_2,signal_2);
+
+lags=-(s_l-1):(s_l-1);
+
+figure;
+
+subplot(2,1,1);
+
+plot(lags,autocorr_result1);
+
+title("Autocorrelation of 1 random processes");
+
+xlabel('Lag');
+
+ylabel('Autocorrelation');
+
+grid on;
+
+subplot(2,1,2);
+
+plot(lags,autocorr_result2);
+
+title("Autocorrelation of 2 random processes");
+
+xlabel('Lag');
+
+ylabel('Autocorrelation');
+
+grid on;
+
+[psd,frequencies]=pwelch(signal_1,[],[],[],1);
+
+figure;
+
+semilogy(frequencies,psd);
+
+title('PSD of Signal 1');
+
+xlabel('Frequency(Hz)');
+
+ylabel('Power/Frequnecy(db/Hz)');
+
+grid on;
+
+[psd,frequencies]=pwelch(signal_2,[],[],[],1);
+
+%[Pxx,F] = pwelch(X,WINDOW,NOVERLAP,NFFT,Fs) 
+% returns a PSD computed as a function of physical frequency.  
+% Fs is the sampling frequencyspecified in hertz.  
+% If Fs is empty, it defaults to 1 Hz.
+
+figure;
+
+semilogy(frequencies,psd);
+
+title('PSD of Signal 2');
+
+xlabel('Frequency(Hz)');
+
+ylabel('Power/Frequnecy(db/Hz)');
+
+grid on;
